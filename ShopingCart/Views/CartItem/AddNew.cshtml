@@ -1,0 +1,145 @@
+﻿@using ShopingCart.Common;
+@model ShopingCart.Application.Models.DTOs.CartItemDTOs.CartItemViewModelReq
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+@{
+    ViewData["Title"] = "AddNew CartItems";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#btnsave").click(function () {
+
+            SaveData();
+        });
+
+        $("#btCancel").click(function () {
+            ResetData();
+        });
+
+    });
+
+    function SaveData() {
+
+        var objData = new FormData();
+        from.append("CartID", $("#CartID").val());
+        from.append("ItemCode", $("#ItemCode").val());
+        from.append("ItemName", $("#ItemName").val());
+        from.append("UnitPrice", $("#UnitPrice").val());
+        from.append("Amount", $("#Amount").val());
+        from.append("Discount", $("#Discount").val());
+        from.append("Total", $("#Total").val());
+        from.append("ImagePath", $("#ImagePath").val());
+
+
+        $.ajax({
+            async: true,
+            dataType: "JSON",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            url: "@CartItemRoute.AddNew",
+            data: objData,
+            success: function (data) {
+                alert(data);
+            },
+            error: function (error) {
+                alert(error)
+            }
+        });
+    }
+
+
+    function ResetData() {
+        $("#CartID").val(""));
+        $("#ItemCode").val(""));
+        $("#ItemName").val(""));
+        $("#UnitPrice").val(""));
+        $("#Amount").val(""));
+        $("#Discount").val(""));
+        $("#Total").val(""));
+        $("#ImagePath").val(""));
+    }
+
+</script>
+<form method="post">
+    <div class="card mt-1">
+        <div class="card-header">
+            <h2>Category</h2>
+            Add Category
+        </div>
+        <div class="card-body">
+            <div class="row-cols-1">
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="CartID">Code</label>
+                        <input class="form-control" asp-for="CartID" id="CartID" />
+                        <span asp-validation-for="CartID" class="text-danger"></span>
+                    </dv>
+                </div>
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="ItemCode">Item Code</label>
+                        <input class="form-control" asp-for="ItemCode" id="ItemCode" />
+                        <span asp-validation-for="ItemCode" class="text-danger"></span>
+                    </dv>
+                </div>
+
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="ItemName">Item Name</label>
+                        <input class="form-control" asp-for="ItemName" id="ItemName" />
+                        <span asp-validation-for="ItemName" class="text-danger"></span>
+                    </dv>
+                </div>
+
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="UnitPrice">Price</label>
+                        <input type="number" class="form-control" asp-for="UnitPrice" id="UnitPrice" />
+                        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                    </dv>
+                </div>
+
+                    <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Amount">Amount</label>
+                        <input type="number" class="form-control" asp-for="Amount" id="Amount" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </dv>
+                </div>
+
+                
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Discount">Discount</label>
+                        <input type="number" class="form-control" asp-for="Discount" id="Discount" />
+                        <span asp-validation-for="Discount" class="text-danger"></span>
+                    </dv>
+                </div>
+            
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Total">Total</label>
+                        <input type="number" class="form-control" asp-for="Total" id="Total" />
+                        <span asp-validation-for="Total" class="text-danger"></span>
+                    </dv>
+                </div>
+
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="ImagePath">ItemPhoto</label>
+                        <input type="image" class="image-controle" asp-for="ImagePath" id="InStock" />
+                        <span asp-validation-for="ImagePath" class="text-danger"></span>
+                    </dv>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnsave" class="btn btn-primary">Save</button>
+            <a asp-action="Index" id="btCancel" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>

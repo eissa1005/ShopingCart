@@ -1,0 +1,44 @@
+﻿@model List<ShopingCart.Application.Models.DTOs.CustomerDTOs.CustomerViewModelRes>
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+    <h3> Customer Details</h3>
+</p>
+<div>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th>Code</th>
+                <th>Customer Name</th>
+                <th>Email</th>
+                 <th>Phone</th>
+                <th>First Address</th>
+                <th>Secound Address</th>
+                <th>City</th>
+                <th>Country</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.Data.CustomerID</td>
+                    <td>@customer.Data.CustomerName</td>
+                    <td>@customer.Data.Email</td>
+                    <td>@customer.Data.Phone</td>
+                    <td>@customer.Data.Address1</td>
+                    <td>@customer.Data.Address2</td>
+                    <td>@customer.Data.City</td>
+                    <td>@customer.Data.Country</td>
+                    <td><input asp-asp-controller="Customer" asp-action="Edit/@customer.Data.CustomerID" type="button" class="btn btn-primary" id="btnEdit" value="Edit" /></td>
+                    <td><input asp-asp-controller="Customer" asp-action="Delete/@customer.Data.CustomerID" type="button" class="btn btn-success" id="btnDelete" value="Delete" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

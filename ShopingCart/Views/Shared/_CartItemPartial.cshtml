@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Http
+@using ShopingCart.Application.Abstraction;
+@inject ICartSessionService Session;
+<ul>
+
+    <li>
+
+        @{
+            var cartSession = Session.GetCart();
+            if (cartSession == null)
+            {
+
+
+            }
+
+        }
+
+
+
+    </li>
+
+
+</ul>

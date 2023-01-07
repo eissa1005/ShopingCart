@@ -1,0 +1,105 @@
+﻿@model List<ShopingCart.Application.Models.DTOs.ItemsDTOs.ItemsViewModelRes>
+
+
+<div class="row g-3" style="padding-top:15px;">
+
+    <div class="col">
+        <input type="text" class="form-control" placeholder="product name" aria-label="First name">
+    </div>
+    <div class="col">
+        <input type="button" id="btnSearch" value="Search Products" class="btn btn-primary" aria-label="Last name">
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function AddToCart(item){
+        
+        var itemId = $(item).attr("itemid");
+
+        var formData = new FormData();
+        formData.append("ID", itemId);
+
+        $.ajax({
+
+            async:true,
+            type:'POST',
+            contentType:false,
+            processData:false,
+            data: formData,
+            url:@CategoryRoute.Index,
+            success:function(data){
+                console.log(data);
+                if (data.success){
+
+                }
+            },
+            error: function(ex){
+                console.log(ex);
+            };
+
+        });
+    }
+
+
+
+</script>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th></th>
+    </tr>
+    <tr>
+        <td class="row g-3">
+            @foreach (var objProduct in Model)
+            {
+
+                <div class="col-md-4">
+                    <div class="card preview">
+                        <div class="card">
+                            <div class="card-img-wrapper">
+                                <img class="card-img-top" style="width:100%; height:150px" src="/Images//default.png">
+                            </div>
+                            <div class="card-body">
+
+                                <h1 class="card-title">@objProduct.Data.ItemName</h1>
+
+                                 <div>
+
+                                    <strong>Description : @objProduct.Data.Description</strong>
+                                </div>
+
+                                <div>
+
+                                    <strong>Product Code : @objProduct.Data.ItemCode</strong>
+                                </div>
+
+                                <div>
+                                    <strong> Quantity : @objProduct.Data.Quantity</strong>
+                                </div>
+                                <div>
+                                    <strong> Price : @objProduct.Data.ItemPrice</strong>
+                                </div>
+
+                                <div>
+                                    <strong> Total : @objProduct.Data.Total</strong>
+                                </div>
+
+                                <p align="right">
+                                    <span> <input type="button" name="AddCart" value="Add To Cart" class="btn btn-primary" itemid="@objProduct.Data.ItemCode" id="btnAddCart" onclick="AddToCart(this)"> </span>
+                                </p>
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group d-flex">
+                                    <button class="btn btn-primary">Like</button>
+                                    <button class="btn btn-success">Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </td>
+    </tr>
+
+</table>

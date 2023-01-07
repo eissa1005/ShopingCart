@@ -1,0 +1,29 @@
+﻿@model List<ShopingCart.Application.Models.DTOs.CartItemDTOs.CartItemViewModelRes>
+<link href="~/css/card.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "CartItems";
+
+}
+
+<h1>CartItems</h1>
+@*@{
+    int index = 1;
+}*@
+
+@*@foreach (var cartItem in Model)
+{
+    <div class="card">
+        <img class="propImg" style="width:30px;height:30px" src="../Models/Images/pro+@index+.jpg" alt="Card image cap">
+        <div class="card-header"></div>
+        <div class="card-body p-2">
+            <h1>@cartItem.Data.CartID</h1>
+            <h1>@cartItem.Data.ItemCode</h1>
+            <h1>@cartItem.Data.ItemName</h1>
+            <h2>@cartItem.Data.UnitPrice</h2>
+            <h3>@cartItem.Data.Amount</h3>
+            <h3>@cartItem.Data.Total</h3>
+        </div>
+    </div>
+    index++;
+}*@
+

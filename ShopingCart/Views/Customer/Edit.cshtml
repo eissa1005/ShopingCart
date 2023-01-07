@@ -1,0 +1,138 @@
+﻿@using ShopingCart.Common;
+@model ShopingCart.Application.Models.DTOs.CustomerDTOs.CustomerViewModelReq
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#btnsave").click(function () {
+
+            SaveData();
+        });
+
+        $("#btCancel").click(function () {
+            ResetData();
+        });
+
+    });
+
+    function SaveData() {
+
+        var objData = new FormData();
+        from.append("CustomerID", $("#CustomerID").val());
+        from.append("CustomerName", $("#CustomerName").val());
+        from.append("Email", $("#Email").val());
+        from.append("Phone", $("#Phone").val());
+        from.append("Address1", $("#Address1").val());
+        from.append("Address2", $("#Address2").val());
+        from.append("City", $("#City").val());
+        from.append("Country", $("#Country").val());
+
+        $.ajax({
+            async: true,
+            dataType: "JSON",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            url: "@CustomerRoute.Edit/@Model.CustomerID",
+            data: objData,
+            success: function (data) {
+                alert(data);
+            },
+            error: function (error) {
+                alert(error)
+            }
+        });
+    }
+
+
+    function ResetData() {
+        $("#CustomerID").val(""));
+        $("#CustomerName").val(""));
+        $("#Email").val(""));
+        $("#Phone").val(""));
+        $("#Address1").val(""));
+        $("#Address2").val(""));
+        $("#City").val(""));
+        $("#Country").val(""));
+    }
+
+</script>
+<form method="post">
+    <div class="card mt-1">
+        <div class="card-header">
+            <h2>Category</h2>
+            Add Category
+        </div>
+        <div class="card-body">
+            <div class="row-cols-1">
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="CustomerID">Code</label>
+                        <input class="form-control" asp-for="CustomerID" id="CategoryID" />
+                        <span asp-validation-for="CustomerID" class="text-danger"></span>
+                    </dv>
+                </div>
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="CustomerName">Customer Name</label>
+                        <input class="form-control" asp-for="CustomerName" id="CategoryName" />
+                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </dv>
+                </div>
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Email">Email</label>
+                        <input class="form-control" asp-for="Email" id="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </dv>
+                </div>
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Phone">Phone</label>
+                        <input class="form-control" asp-for="Phone" id="Phone" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </dv>
+                </div>
+
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Address1">First Address</label>
+                        <textarea class="form-control" asp-for="Address1" id="Address1"></textarea>
+                        <span asp-validation-for="Address1" class="text-danger"></span>
+                    </dv>
+                </div>
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Address2">Secound Address</label>
+                        <textarea class="form-control" asp-for="Address2" id="Address2"></textarea>
+                        <span asp-validation-for="Address2" class="text-danger"></span>
+                    </dv>
+                </div>
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="City">City</label>
+                        <input class="form-control" asp-for="City" id="City" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </dv>
+                </div>
+                <div class="col-md-8">
+                    <dv class="form-group">
+                        <label class="label-control" asp-for="Country">Country</label>
+                        <input class="form-control" asp-for="Country" id="Country" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </dv>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnsave" class="btn btn-primary">Save</button>
+            <a asp-action="Index" id="btCancel" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>

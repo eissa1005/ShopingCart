@@ -1,0 +1,62 @@
+﻿@model List<ShopingCart.Application.Models.DTOs.CategoryDTOs.CategoryViewModelRes>
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+    <h3> Category Details</h3>
+</p>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: @CategoryRoute.Edit,
+            data: { CategoryId: $('#CatID').val() },
+            success: function (data) {
+            },
+            error: function (er) {
+                alert(er);
+            }
+        });
+
+    });
+
+</script>
+
+<div>
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th>Code</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Data.CategoryID</td>
+                    <td>@category.Data.CategoryName</td>
+                    <td>@category.Data.Description</td>
+                    <td>
+                        @Html.ActionLink("Edit","Edit", new { CatID = category.Data.ID }, new { id = "edit", @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Delete","Delete", new {CatID = category.Data.ID }, new { id = "edit", @class = "btn btn-primary" })
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @Html.ActionLink("Back to List", "Index", "Category")
+    </div>
+</div>
+

@@ -1,0 +1,65 @@
+﻿@model List<ShopingCart.Application.Models.DTOs.CartItemDTOs.CartItemViewModelRes>
+@{
+    ViewData["Title"] = "All CartItem";
+}
+
+<p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+    <h3> Cart Items</h3>
+</p>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //$("#btnEdit").click(function () {
+
+        // @* @Html.ActionLink("","Edit","Category");*@
+
+        //});
+
+        //$("#btnDelete").click(function () {
+
+        // @*@Html.ActionLink("","Delete","Category");*@
+
+        //});
+
+    });
+
+</script>
+<div>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th>CartID</th>
+                <th>Item Code</th>
+                <th>Item Name</th>
+                <th>UnitPrice</th>
+                <th>Amount</th>
+                <th>Discount</th>
+                <th>Total</th>
+                <th>Photo</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cartItem in Model)
+            {
+                <tr>
+                    <td>@cartItem.Data.CartID</td>
+                    <td>@cartItem.Data.ItemCode</td>
+                    <td>@cartItem.Data.ItemName</td>
+                    <td>@cartItem.Data.UnitPrice</td>
+                    <td>@cartItem.Data.Amount</td>
+                    <td>@cartItem.Data.Discount</td>
+                    <td>@cartItem.Data.Total</td>
+                    <td>@cartItem.Data.ImagePath</td>
+
+                    <td><input type="image" src="@cartItem.Data.ImagePath" style="width:30px;height:30px" /></td>
+                    <td><input asp-asp-controller="CartItem" asp-action="Edit/@cartItem.Data.CartID" type="button" class="btn btn-primary" id="btnEdit" value="Edit" /></td>
+                    <td><input asp-asp-controller="CartItem" asp-action="Delete/@cartItem.Data.CartID" type="button" class="btn btn-success" id="btnDelete" value="Delete" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

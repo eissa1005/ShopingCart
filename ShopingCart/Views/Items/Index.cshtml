@@ -4,46 +4,76 @@
 <div class="row g-3" style="padding-top:15px;">
 
     <div class="col">
-        <input type="text" class="form-control" placeholder="product name" aria-label="First name">
+        <input type="text" class="form-control" id="txtSearch" asp-asp-for="ItemName" placeholder="product name" aria-label="product name">
     </div>
-    <div class="col">
-        <input type="button" id="btnSearch" value="Search Products" class="btn btn-primary" aria-label="Last name">
+    <div class="col" style="margin-bottom:15px">
+        <input type="button" id="btnSearch" onclick="SearchProduct(this)" asp-action="Search" asp-for-SearchName="itemname" value="Search Products" class="btn btn-primary" aria-label="product name">
     </div>
 </div>
 
 <script type="text/javascript">
 
-    function AddToCart(item){
-        
-        var itemId = $(item).attr("itemid");
+    function AddToCart(item) {
 
-        var formData = new FormData();
-        formData.append("ID", itemId);
+        var itemCode = $(item).attr("itemid");
+        alert(itemCode);
 
-        $.ajax({
+        var objData = new FormData();
+        objData.append("ItemCode", itemCode);
 
-            async:true,
-            type:'POST',
-            contentType:false,
-            processData:false,
-            data: formData,
-            url:@CategoryRoute.Index,
-            success:function(data){
-                console.log(data);
-                if (data.success){
 
-                }
-            },
-            error: function(ex){
-                console.log(ex);
-            };
+        $.post('@ItemsRoute.Index', { "ItemCode": itemCode },
+            function (response) {
+                console.log(response);
+            }).fail(function (error) {
+                console.log(error);
+            });
 
-        });
+     
+
+        //$.ajax({
+        //    async: true,
+        //    type: "POST",
+        //    dataType:"JSON",
+        //    contentType: false,
+        //    processData: false,
+        //    data: JSON.stringify({ ItemCode: itemId }),
+        //    url: "@ItemsRoute.Index",
+        //    success: function (data) {
+        //        console.log(data);
+        //        if (data.success) {
+
+        //            $("#itemCart").text("Cart(" + data.counter + ")");
+        //        }
+        //    },
+        //    error: function (ex) {
+        //        console.log(ex);
+        //    };
+
+        //});
+
+
     }
 
+    function SearchProduct(itemName){
 
+        var itemsearch = $("#txtSearch").val();
+        alert(itemsearch);
+
+        debugger;
+        $.pos('@ItemsRoute.SearchProducts', { "ItemName": itemsearch },
+
+            function (response) {
+                console.log(response);
+            }).fail(function (error) {
+                console.log(error);
+            });
+
+
+    }
 
 </script>
+
 <table class="table table-striped table-bordered">
     <tr>
         <th></th>
@@ -63,7 +93,7 @@
 
                                 <h1 class="card-title">@objProduct.Data.ItemName</h1>
 
-                                 <div>
+                                <div>
 
                                     <strong>Description : @objProduct.Data.Description</strong>
                                 </div>
@@ -85,7 +115,8 @@
                                 </div>
 
                                 <p align="right">
-                                    <span> <input type="button" name="AddCart" value="Add To Cart" class="btn btn-primary" itemid="@objProduct.Data.ItemCode" id="btnAddCart" onclick="AddToCart(this)"> </span>
+                                    <input type="button" asp-asp-controller="Items" asp-action="Index" name="AddCart" value="Add To Cart" class="btn btn-primary"
+                                       itemid="@objProduct.Data.ItemCode" id="btnAddCart" onclick="AddToCart(this)">
                                 </p>
 
                             </div>

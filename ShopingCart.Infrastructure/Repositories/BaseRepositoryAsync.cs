@@ -31,7 +31,11 @@ namespace ShopingCart.Infrastructure
             return await ApplySpecification(spec).ToListAsync();
         }
 
-        public async Task<T> FirstOrDefaultAsync(ISpecification<T> spec)
+        public async Task<T> FirstOrDefaultAsync()
+        {
+            return await _entity.Set<T>().FirstOrDefaultAsync();
+        }
+        public async Task<T> FirstOrDefaultAsyncSpec(ISpecification<T> spec)
         {
            return await ApplySpecification(spec).FirstOrDefaultAsync();
         }

@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShopingCart.Domain.Entities
 {
-    public class Category : BaseEntity
+    public class Category : IBaseEntity
     {
         public Category() 
         {
             Items = new HashSet<Items>();
+     
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

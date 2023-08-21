@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace ShopingCart.Application.Core.Models
 {
     public class Email

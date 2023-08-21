@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ShopingCart.Domain.Core.Specifications
 {
-    public class BaseSpecification<T> : ISpecification<T> where T : BaseEntity
+    public class BaseSpecification<T> : ISpecification<T> where T : IBaseEntity
     {
         public BaseSpecification(Expression<Func<T, bool>> criteial) 
         {

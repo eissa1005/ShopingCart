@@ -32,11 +32,17 @@ namespace ShopingCart.Application.Services.CategoryService
             var CategoetDto = mapper.Map<CategoryDTOs>(category);
             return new CategoryViewModelRes() { Data = CategoetDto };
         }
+        public async Task<CategoryViewModelRes> FirstOrDefaultAsync()
+        {
+            var category = await uow.Repository<Category>().FirstOrDefaultAsync();
+            var categoryDto = mapper.Map<CategoryDTOs>(category);
+            return new CategoryViewModelRes() { Data = categoryDto };
+        }
         public async Task<CategoryViewModelRes> FirstOrDefaultAsync(string CategoryID)
         {
             var categorySpecification = CategorySpecification.GetFirstOrDefaultCategory(CategoryID);
 
-            var category = await uow.Repository<Category>().FirstOrDefaultAsync(categorySpecification);
+            var category = await uow.Repository<Category>().FirstOrDefaultAsyncSpec(categorySpecification);
 
             var categoryDto = mapper.Map<CategoryDTOs>(category);
 

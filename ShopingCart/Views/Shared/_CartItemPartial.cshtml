@@ -1,21 +1,24 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using ShopingCart.Application.Abstraction;
-@inject ICartSessionService Session;
+@using ShopingCart.Application.Models.DTOs.CartItemDTOs;
+@inject ISessionService Session;
 <ul>
 
     <li>
-
         @{
-            var cartSession = Session.GetCart();
-            if (cartSession == null)
+            var data = Session.GetObjects("Cart");
+            var counter = Session.GetInt32("counter");
+            if(data == null)
             {
-
+                @Html.ActionLink("Cart","Items","Index","Items", new { id ="itemCart" });
 
             }
-
-        }
-
-
+            else
+            {
+                @Html.ActionLink("Cart","Cart(" +counter + ")","Index","Items", new { id ="itemCart" })
+                ;
+            }
+         }
 
     </li>
 

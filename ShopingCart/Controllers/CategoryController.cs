@@ -43,26 +43,33 @@ namespace ShopingCart.Controllers
             return new JsonResult(new { data = req });
         }
 
+        [HttpGet]
         public async Task<ActionResult> Edit(int CatID)
         {
-            var lstCategory = await categoryService.GetByIdAsync(CatID);
-            return View(lstCategory);
+            var category = await categoryService.GetByIdAsync(CatID);
+            var categoryDTOs = new CategoryDTOs()
+            {
+                CategoryID = category.Data.CategoryID,
+                CategoryName = category.Data.CategoryName,
+                Description = category.Data.Description,
+                ID = category.Data.ID,
+            };
+
+            var request = mapper.Map<CategoryViewModelReq>(categoryDTOs);
+            return View(request);
         }
 
-        //[HttpPut(CategoryRoute.Edit)]
-        //[ValidateAntiForgeryToken]
-        [HttpPost("Edit/{id}")]
-        public async Task<JsonResult> Edit(CategoryViewModelReq req)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Edit(CategoryViewModelReq reuest)
         {
-            var category = await categoryService.FirstOrDefaultAsync(req.CategoryID);
-            var reuest = mapper.Map<CategoryViewModelReq>(category);
             if (reuest == null)
             {
                 logger.LogError($"Can't Edit ID equal zero {typeof(CategoryController)}");
                 return new JsonResult(null);
             }
             await categoryService.UpdateCategory(reuest);
-            return new JsonResult(new { data = category });
+            return new JsonResult(new { data = reuest });
         }
 
         [HttpDelete(CategoryRoute.Delete)]

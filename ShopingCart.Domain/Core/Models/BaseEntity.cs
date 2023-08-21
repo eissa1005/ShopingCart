@@ -1,6 +1,8 @@
-﻿namespace ShopingCart.Domain.Core.Models
+﻿using ShopingCart.Domain;
+
+namespace ShopingCart.Domain.Core.Models
 {
-    public class BaseEntity
+    public class BaseEntity : IBaseEntity
     {
 
     }

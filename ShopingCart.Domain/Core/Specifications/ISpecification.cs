@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace ShopingCart.Domain.Core.Specifications
 {
-    public interface ISpecification<T> where T : BaseEntity
+    public interface ISpecification<T> where T : IBaseEntity
     {
         Expression<Func<T, bool>> Criteial { get; }
         List<Expression<Func<T, object>>> Includes { get; }

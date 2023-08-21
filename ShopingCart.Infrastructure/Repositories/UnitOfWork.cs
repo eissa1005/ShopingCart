@@ -1,4 +1,5 @@
 ﻿using ShopingCart.Application.Core.Repositories;
+using ShopingCart.Domain;
 using ShopingCart.Domain.Core.Models;
 
 namespace ShopingCart.Infrastructure
@@ -16,7 +17,7 @@ namespace ShopingCart.Infrastructure
            
         }
 
-        public IBaseRepository<T> Repository<T>() where T : BaseEntity
+        public IBaseRepository<T> Repository<T>() where T : IBaseEntity
         {
             var contentType = typeof(T);
             if (_repository.ContainsKey(contentType))

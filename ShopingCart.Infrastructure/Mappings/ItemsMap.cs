@@ -29,7 +29,7 @@ namespace ShopingCart.Infrastructure
 
             builder.Property(p => p.Quantity)
               .HasMaxLength(150)
-              .HasColumnType<decimal>("decimal")
+              .HasColumnType<int>("decimal")
               .HasDefaultValue(0);
 
             builder.Property(p => p.ItemPrice)

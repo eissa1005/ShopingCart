@@ -7,7 +7,7 @@ using ShopingCart.Domain.Entities;
 
 namespace ShopingCart.Application.Services.ServiceUsers
 {
-    public class UserService : IUserService
+    public class UserService : IUserService 
     {
         private readonly IUnitOfWork uow;
         private readonly ILoggerService logService;
@@ -22,8 +22,8 @@ namespace ShopingCart.Application.Services.ServiceUsers
 
         public async Task<UserViewModelRes> CreateUser(UserViewModelReq request)
         {
-            var userEnitiy = mapper.Map<User>(request);
-            var user = await uow.Repository<User>().AddAsync(userEnitiy);
+            var userEnitiy = mapper.Map<Users>(request);
+            var user = await uow.Repository<Users>().AddAsync(userEnitiy);
             await uow.SaveChangesAsync();
             var userDTOs = mapper.Map<UserDTOs>(user);
             return new UserViewModelRes() { Data = userDTOs };
@@ -32,28 +32,28 @@ namespace ShopingCart.Application.Services.ServiceUsers
 
         public async Task<int> DeleteUser(UserViewModelReq request)
         {
-            var user = mapper.Map<User>(request);
+            var user = mapper.Map<Users>(request);
             if (user == null)
             {
                 logService.LogError("User is Empty");
                 return await Task.FromResult(0);
             }
 
-            uow.Repository<User>().Delete(user);
+            uow.Repository<Users>().Delete(user);
             int result = await uow.SaveChangesAsync();
             return result;
         }
 
         public async Task<int> UpdateUser(UserViewModelReq request)
         {
-            var user = await uow.Repository<User>().GetById(request.ID);
+            var user = await uow.Repository<Users>().GetById(request.ID);
             if (user == null)
             {
                 logService.LogError("User is Not Exists in database");
                 return await Task.FromResult(0);
             }
 
-            uow.Repository<User>().Update(user);
+            uow.Repository<Users>().Update(user);
             int result = await uow.SaveChangesAsync();
             return result;
         }

@@ -13,7 +13,6 @@ namespace ShopingCart.Infrastructure
         public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CartDbContext>(options =>
-
              options.UseSqlServer("name=ConnectionStrings:CartDbConnection", k => k.MigrationsAssembly("ShopingCart.DbMigrations")));
             
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

@@ -37,7 +37,7 @@ namespace ShopingCart.Application.Services.CustomerService
         public async Task<CustomerViewModelRes> FirstOrDefaultCustomer(string customerID)
         {
             var customerSpecification = CustomerSpecification.FirstOrDefaultCustomers(customerID);
-            var customer = await uow.Repository<Customer>().FirstOrDefaultAsync(customerSpecification);
+            var customer = await uow.Repository<Customer>().FirstOrDefaultAsyncSpec(customerSpecification);
             var customerDto = mapper.Map<CustomerViewModelRes>(customer);
             return customerDto;
         }

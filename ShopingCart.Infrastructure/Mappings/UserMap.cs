@@ -4,27 +4,17 @@ using ShopingCart.Domain.Entities;
 
 namespace ShopingCart.Infrastructure
 {
-    public class UserMap : IEntityTypeConfiguration<User>
+    public class UserMap : IEntityTypeConfiguration<Users>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Users> builder)
         {
-            builder.Property(p => p.ID)
-                 .IsRequired()
-                 .IsUnicode()
-                 .HasColumnType<int>("Integer");
 
-            builder.Property(p => p.UserID)
-                .IsUnicode()
-                .IsRequired()
-                .HasColumnType<string>("nvarchar(150)")
-                .HasMaxLength(150);
+            //builder.Property(p => p.UserID)
+            //    .IsUnicode()
+            //    .IsRequired()
+            //    .HasColumnType<string>("nvarchar(450)")
+            //    .HasMaxLength(450);
 
-
-            builder.Property(p => p.UserName)
-               .IsUnicode()
-               .IsRequired()
-               .HasColumnType<string>("nvarchar(300)")
-               .HasMaxLength(300);
 
             builder.Property(p => p.Address)
                .HasColumnType<string>("nvarchar(300)")
@@ -46,17 +36,6 @@ namespace ShopingCart.Infrastructure
            .HasColumnType<string>("nvarchar(150)")
            .HasMaxLength(150);
 
-            builder.Property(p => p.UserName)
-            .IsRequired()
-            .IsUnicode()
-            .HasColumnType<string>("nvarchar(150)")
-            .HasMaxLength(150);
-
-
-            builder.Property(p => p.Balance)
-           .HasColumnType<decimal>("decimal")
-           .HasMaxLength(150).HasDefaultValue(0);
-
 
             builder.Property(p => p.Status)
                 .HasConversion<int>()
@@ -66,16 +45,6 @@ namespace ShopingCart.Infrastructure
             .HasMaxLength(25)
             .HasColumnType<string>("nvarchar(25)")
             .HasMaxLength(25);
-
-
-            builder.Property(p => p.Email)
-            .HasColumnType<string>("nvarchar(350)");
-
-            builder.Property(p => p.Password)
-                .HasColumnType<string>("nvarchar(350)")
-                .HasMaxLength(350);
-
-
 
 
         }

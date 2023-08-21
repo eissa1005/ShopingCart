@@ -54,7 +54,7 @@ namespace ShopingCart.Infrastructure
             builder.Property(p => p.UserID)
               .IsRequired()
               .HasMaxLength(150)
-              .HasColumnType<string>("nvarchar(150)");
+              .HasColumnType<string>("nvarchar(450)");
 
         }
     }

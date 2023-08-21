@@ -13,15 +13,17 @@ namespace ShopingCart.Application.ProfileMapper
         public AutoProfileConfiguration()
         {
             // Mapper User
-            CreateMap<User, UserDTOs>().ReverseMap();
-            CreateMap<User, UserViewModelRes>().ReverseMap();
-            CreateMap<User, UserViewModelReq>().ReverseMap();
+            CreateMap<Users, UserDTOs>().ReverseMap();
+            CreateMap<Users, UserViewModelRes>().ReverseMap();
+            CreateMap<Users, UserViewModelReq>().ReverseMap();
             CreateMap<UserViewModelReq, UserViewModelRes>().ReverseMap();
 
             // Mapper Category
             CreateMap<Category, CategoryDTOs>().ReverseMap();
             CreateMap<CategoryViewModelRes, CategoryDTOs>().ReverseMap();
             CreateMap<CategoryViewModelReq, CategoryDTOs>().ReverseMap();
+            CreateMap<CategoryViewModelReq, CategoryViewModelRes>().ReverseMap();
+
 
             CreateMap<CategoryViewModelRes, Category>().ReverseMap();
             CreateMap<CategoryViewModelReq, Category>().ReverseMap();

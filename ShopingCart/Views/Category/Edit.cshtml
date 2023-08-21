@@ -7,10 +7,26 @@
 }
 
 <script type="text/javascript">
+      $(document).ready(function () {
 
+        $("#btnsave").click(function () {
+
+            saveCategory();
+        });
+
+        $("#btCancel").click(function(){
+            ResetData();
+        });
+
+    });
+  
+    
     function saveCategory() {
 
+        debugger
+        alert(@Model.ID.ToString());
         var objData = new FormData();
+        from.append("ID", $("#ID").val());
         from.append("CategoryID", $("#CategoryID").val());
         from.append("CategoryName", $("#CategoryName").val());
         from.append("Description", $("#Description").val());
@@ -21,8 +37,8 @@
             type: post,
             contentType:false,
             processData:false,
-            url: "@CategoryRoute.Edit/@Model.CategoryID",
             data: objData,
+            url: "@CategoryRoute.Edit",
             success:function(data){
                 alert(data);
             },
@@ -31,7 +47,6 @@
             }
         });
     }
-    
     
     function ResetData(){
         $("#CategoryID").val(""));
@@ -44,13 +59,14 @@
 <form method="post">
     <div class="card mt-4">
         <div class="card-header">
-            <h2>@Model.CategoryID</h2>
+            <h2>@Model.CategoryName</h2>
             Add Category
         </div>
         <div class="card-body">
             <div class="row-cols-1">
                 <div class="col-md-8">
                     <dv class="form-group">
+                        <input class="form-control" asp-for="ID" id="ID" hidden="hidden" />
                         <label class="label-control" asp-for="CategoryID">Code</label>
                         <input class="form-control" asp-for="CategoryID" id="CategoryID" />
                         <span asp-validation-for="CategoryID" class="text-danger"></span>
@@ -74,7 +90,7 @@
 
         </div>
         <div class="card-footer">
-            <button type="submit" id="btnsave" onclick="saveCategory()" class="btn btn-primary">Save</button>
+            <button type="submit" id="btnsave" asp-action="Edit" class="btn btn-primary">Save</button>
             <a asp-action="Index" id="btCancel" onreset="ResetData()" class="btn btn-secondary">Cancel</a>
         </div>
     </div>

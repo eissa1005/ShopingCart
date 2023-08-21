@@ -5,7 +5,7 @@ namespace ShopingCart.Application.Models.DTOs.UserDTOs
 {
     public class UserDTOs
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,24 +20,23 @@ namespace ShopingCart.Application.Models.DTOs.UserDTOs
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        internal UserDTOs(User user)
+        internal UserDTOs(Users user)
         {
-            ID = user.ID;
+            ID = user.Id;
             UserID = user.UserID;
             FirstName = user.FirstName;
             LastName = user.LastName;
             Status = user.Status;   
-            Balance = user.Balance;
             Address = user.Address;
             City = user.City;
             Country = user.Country;
             Phone = user.Phone;
-            Roles = user.Roles;
             UserName = user.UserName;
             Email = user.Email;
-            Password = user.Password;
+            Password = user.PasswordHash;
+            
         }
-        public static UserDTOs Create(User user)
+        public static UserDTOs Create(Users user)
         {
             return new UserDTOs(user);
         }

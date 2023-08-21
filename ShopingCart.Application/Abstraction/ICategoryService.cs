@@ -7,6 +7,7 @@ namespace ShopingCart.Application.Abstraction
         Task<CategoryViewModelRes> GetByIdAsync(int id);
         Task<CategoryViewModelRes> FindAsync(string id);
         Task<IReadOnlyCollection<CategoryViewModelRes>> GetAllCategoryAsync();
+        Task<CategoryViewModelRes> FirstOrDefaultAsync();
         Task<CategoryViewModelRes> FirstOrDefaultAsync(string CategoryID);
         Task<int> CreateCategory(CategoryViewModelReq request);
         Task<int> UpdateCategory(CategoryViewModelReq request);

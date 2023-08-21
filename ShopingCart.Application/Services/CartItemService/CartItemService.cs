@@ -30,7 +30,7 @@ namespace ShopingCart.Application.Services.CartItemService
         {
             var cartitemspec = CartItemSpecification.GetFirstOrDefaultCartItem(CartID);
 
-            var cartItems = await uow.Repository<CartItem>().FirstOrDefaultAsync(cartitemspec);
+            var cartItems = await uow.Repository<CartItem>().FirstOrDefaultAsyncSpec(cartitemspec);
 
             return mapper.Map<CartItemViewModelRes>(cartItems);
         }

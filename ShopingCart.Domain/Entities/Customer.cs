@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShopingCart.Domain.Entities
 {
-    public class Customer : BaseEntity
+    public class Customer : IBaseEntity
     {
         public Customer() 
         {

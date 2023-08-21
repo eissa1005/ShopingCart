@@ -2,7 +2,7 @@
 @model ShopingCart.Application.Models.DTOs.ItemsDTOs.ItemsViewModelReq
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="~/css/card.css" />
-
+<link href="~/css/stylesheet.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "AddNew Product";
 }
@@ -12,7 +12,7 @@
           
 
         $("#btnsave").click(function () {
-
+           
             SaveData();
         });
 
@@ -160,7 +160,7 @@
                 <div class="col-md-4">
                     <dv class="form-group">
                         <label class="label-control" asp-for="ImagePath">ProductPhoto</label>
-                        <input type="image" class="form-controle" asp-for="ImagePath" id="InStock" />
+                        <input type="image" class="imageUploadForm" asp-for="ImagePath" id="InStock" />
                         <span asp-validation-for="ImagePath" class="text-danger"></span>
                     </dv>
                 </div>

@@ -36,7 +36,7 @@ namespace ShopingCart.Application.Services.ItemsService
         public async Task<ItemsViewModelRes> FirstOrDefaultItems(string itemCode)
         {
             var itemSpecification = ItemSpecification.FirstOrDefaultItems(itemCode);
-            var item = await uow.Repository<Items>().FirstOrDefaultAsync(itemSpecification);
+            var item = await uow.Repository<Items>().FirstOrDefaultAsyncSpec(itemSpecification);
             var itemDto = mapper.Map<ItemsDTOs>(item);
             return new ItemsViewModelRes() { Data = itemDto };
         }

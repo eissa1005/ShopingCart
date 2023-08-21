@@ -1,25 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\pro1.jpg" />
-    <None Include="wwwroot\Images\pro2.jpg" />
-    <None Include="wwwroot\Images\pro3.jpg" />
-    <None Include="wwwroot\Images\pro4.jpg" />
-    <None Include="wwwroot\Images\pro5.jpeg" />
-    <None Include="wwwroot\Images\pro6.jpg" />
-    <None Include="wwwroot\Images\pro7.jpg" />
-    <None Include="wwwroot\Images\pro8.jpg" />
+    <Content Remove="wwwroot\css\site.css" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -31,14 +27,59 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
+    <PackageReference Include="Sitecore.Support.MvcDynamicPlaceholders" Version="1.0.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\CartItem\AddNew.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\CartItem\Delete.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\CartItem\Edit.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\CartItem\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Items\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Items\AddNew.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Items\AddNew.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Items\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Items\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Items\Delete.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Items\Edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ShopingCart.Application\ShopingCart.Application.csproj" />
-    <ProjectReference Include="..\ShopingCart.DbMigrations\ShopingCart.DbMigrations.csproj" />
-    <ProjectReference Include="..\ShopingCart.Infrastructure\ShopingCart.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ShopingCart.Infrastructure">
+      <HintPath>..\ShopingCart.Infrastructure\bin\Debug\net6.0\ShopingCart.Infrastructure.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

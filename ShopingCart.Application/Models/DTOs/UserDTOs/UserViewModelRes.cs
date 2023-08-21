@@ -5,5 +5,6 @@ namespace ShopingCart.Application.Models.DTOs.UserDTOs
     public class UserViewModelRes
     {
         public UserDTOs Data { get;set; }
+        
     }
 }

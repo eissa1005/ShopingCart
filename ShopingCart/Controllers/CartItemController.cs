@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShopingCart.Application.Abstraction;
+using ShopingCart.Application.Core.Helper;
 using ShopingCart.Application.Core.Repositories;
 using ShopingCart.Application.Core.Services;
 using ShopingCart.Application.Models.DTOs.CartItemDTOs;
@@ -16,11 +17,11 @@ namespace ShopingCart.Controllers
         private readonly ILoggerService logger;
         private readonly IMapper mapper;
         private readonly IUnitOfWork uow;
-        private readonly ICartSessionService Session;
+        private readonly ISessionService Session;
 
-        public List<CartItemViewModelReq> listCartItem = new List<CartItemViewModelReq>();
+        public List<CartItemViewModelReq> listCartItem { get; set; } = new();
 
-        public CartItemController(ICartItemService cartItemService, ILoggerService logger, IMapper mapper, IUnitOfWork uow, ICartSessionService Session)
+        public CartItemController(ICartItemService cartItemService, ILoggerService logger, IMapper mapper, IUnitOfWork uow, ISessionService Session)
         {
             this.cartItemService = cartItemService;
             this.logger = logger;
@@ -35,9 +36,10 @@ namespace ShopingCart.Controllers
 
             var objItems = await uow.Repository<Items>().FindAsync(itemID);
 
-            if(Session.GetCart() != null)
+            if (Session.Get("Cart") != null)
             {
-
+                listCartItem = Session.GetObjects<CartItemViewModelReq>("Cart").ToList();
+                
             }
 
             if (listCartItem.All(s => s.ItemCode == itemID))
@@ -52,7 +54,7 @@ namespace ShopingCart.Controllers
                 objCartItem.ItemCode = itemID;
                 objCartItem.CartID = objItems.ItemCode;
                 objCartItem.ItemName = objItems.ItemName;
-                objCartItem.Quantity = 1;
+                objCartItem.Quantity = objItems.Quantity;
                 objCartItem.UnitPrice = objItems.ItemPrice;
                 objCartItem.Discount = objItems.Discount;
                 objCartItem.Total = objCartItem.UnitPrice * objCartItem.Quantity;
@@ -60,8 +62,11 @@ namespace ShopingCart.Controllers
                 listCartItem.Add(objCartItem);
             }
 
-            return new JsonResult(new { success = true, data = listCartItem  });
+            Session.SetObject<CartItemViewModelReq>("Cart", objCartItem);
+            Session.SetInt32("counter", listCartItem.Count);
+            return new JsonResult(new { success = true, counter = listCartItem.Count, data = listCartItem });
         }
+
         public ActionResult AddNew()
         {
             return View();

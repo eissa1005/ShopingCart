@@ -23,6 +23,8 @@ namespace ShopingCart.Common
         public const string AddNew = "/Items/AddNew";
         public const string Edit = "/Items/Edit";
         public const string Delete = "/Items/Delete";
+        public const string SearchProducts = "/Items/Search";
+
     }
 
     public static class CartItemRoute

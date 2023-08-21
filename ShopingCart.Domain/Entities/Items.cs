@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShopingCart.Domain.Entities
 {
-    public class Items : BaseEntity
+    public class Items : IBaseEntity
     {
         public Items() 
         { 
@@ -19,7 +19,7 @@ namespace ShopingCart.Domain.Entities
         public string ItemName { get; set; }
         public decimal ItemPrice { get; set; }
         public string Description { get; set; }
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
         public int Discount { get; set; }
         public decimal Total { get; set; }
         public string ImagePath { get; set; }

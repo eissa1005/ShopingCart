@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -19,6 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
   </ItemGroup>
@@ -27,6 +29,12 @@
     <ProjectReference Include="..\ShopingCart.Application\ShopingCart.Application.csproj" />
     <ProjectReference Include="..\ShopingCart.DbMigrations\ShopingCart.DbMigrations.csproj" />
     <ProjectReference Include="..\ShopingCart.Domain\ShopingCart.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ShopingCart.DbMigrations">
+      <HintPath>..\ShopingCart.DbMigrations\bin\Debug\net6.0\ShopingCart.DbMigrations.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

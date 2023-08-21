@@ -1,4 +1,5 @@
 ﻿using ShopingCart.Application.Core.Repositories;
+using ShopingCart.Domain;
 using ShopingCart.Domain.Core.Models;
 namespace ShopingCart.Application.Core.Repositories
 {
@@ -7,7 +8,7 @@ namespace ShopingCart.Application.Core.Repositories
 
         Task<int> SaveChangesAsync();
         Task SaveChangesRollBack();
-        IBaseRepository<T> Repository<T>() where T : BaseEntity;
+        IBaseRepository<T> Repository<T>() where T : IBaseEntity;
 
     }
 }

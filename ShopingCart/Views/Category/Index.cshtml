@@ -14,8 +14,9 @@
         $.ajax({
             type: 'POST',
             url: @CategoryRoute.Edit,
-            data: { CategoryId: $('#CatID').val() },
-            success: function (data) {
+            data: { CategoryID: $('#CatID').val() },
+            success: function (response) {
+                console.log(response);
             },
             error: function (er) {
                 alert(er);
